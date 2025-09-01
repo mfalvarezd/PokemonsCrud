@@ -1,14 +1,22 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
+const express = require("express");
 
-const connectDb = require('./db/mongodb');
+const connectDb = require("./db/mongodb");
 
-const {appConfig,dbConfig} = require('./config');
+const { appConfig, dbConfig } = require("./config");
 
 const app = express();
-connectDb(dbConfig);
-const port = appConfig.port;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+async function initApp(appConfig, dbConfig) {
+  try {
+    await connectDb(dbConfig);
+    app.listen(appConfig.port, () => {
+      console.log(`Server is running on port ${appConfig.port}`);
+    });
+  } catch (error) {
+    console.error("Error initializing application:", error);
+    process.exit(1);
+  }
+}
+
+initApp(appConfig, dbConfig);

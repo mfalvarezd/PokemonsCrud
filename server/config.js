@@ -3,8 +3,8 @@ const config = {
         port: process.env.APP_PORT || 8080
     },
     dbConfig: {
-        host: process.env.DB_HOST || 'localhost',
         port: process.env.DB_PORT || 27017,
+        host: process.env.DB_HOST || 'localhost',   
         dbName: process.env.DB_NAME || 'pokemons'
     }
 };
