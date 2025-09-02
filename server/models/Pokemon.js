@@ -5,7 +5,18 @@ const pokemonSchema = new schema({
     name: { type: String, required: true },
     type: { type: String, required: true },
     level: { type: Number, required: true },
-    imageUrl: { type: String, required: false }
+    imageUrl: { type: String, required: false },
+    stats: {
+        hp: { type: Number, default: 0 },
+        attack: { type: Number, default: 0 },
+        defense: { type: Number, default: 0 },
+        speed: { type: Number, default: 0 }
+    },
+    rarity: {
+        type: String,
+        enum: ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'],
+        default: 'Common'
+    }
 }, { timestamps: true });
 
 pokemonSchema.methods.setImgUrl = function setImgUrl(filename) {

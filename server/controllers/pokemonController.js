@@ -2,12 +2,14 @@ const Pokemon = require("../models/pokemon");
 
 async function addPokemon(req, res) {
   try {
-    const { name, type, level } = req.body;
+    const { name, type, level, rarity, stats } = req.body;
 
     const pokemon = new Pokemon({
       name,
       type,
       level,
+      rarity,
+      stats
     });
     if (req.file) {
       const { filename } = req.file;
@@ -48,7 +50,7 @@ async function getPokemonById(req, res) {
 async function updatePokemon(req, res) {
   try {
     const { id } = req.params;
-    const { name, type, level, imageUrl } = req.body;
+    const { name, type, level, imageUrl, rarity, stats } = req.body;
 
     const pokemon = await Pokemon.findByIdAndUpdate(
       id,
@@ -57,6 +59,8 @@ async function updatePokemon(req, res) {
         type,
         level,
         imageUrl,
+        rarity,
+        stats
       },
       { new: true }
     );
